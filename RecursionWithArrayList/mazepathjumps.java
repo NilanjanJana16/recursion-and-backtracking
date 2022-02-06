@@ -11,8 +11,8 @@ public class mazepathjumps {
         int n = scn.nextInt();
         int m = scn.nextInt();
 
-        ArrayList<String> paths = getMazePaths(1,1,n,m);
-        System.out.println(paths);
+        
+        getMazePaths(1,1,n,m,"");
 
     }
 
@@ -20,43 +20,37 @@ public class mazepathjumps {
     // sc - source column
     // dr - destination row
     // dc - destination column
-    public static ArrayList<String> getMazePaths(int sr, int sc, int dr, int dc) {
+    public static void getMazePaths(int sr, int sc, int dr, int dc, String psf) {
 
 
         if(sr == dr && sc == dc){
-            ArrayList<String> bres = new ArrayList<>();
-            bres.add("");
-            return bres;
+
+            System.out.println(psf);
+            return;
+            
 
         }
 
-        ArrayList<String> paths = new ArrayList<>();
+       
         
         //for horizontal moves
         for(int movesize = 1; movesize <= dc - sc; movesize++){
-            ArrayList<String> hpaths = getMazePaths(sr,sc+movesize,dr,dc);
-            for(String val: hpaths){
-                paths.add("h" + movesize+ val);
-            }
+            getMazePaths(sr,sc+movesize,dr,dc, psf + "h" + movesize);
+            
         }
 
         //for vertical moves
-        for(int movesize = 1; movesize < dr-sr; movesize++){
-            ArrayList<String> vpaths = getMazePaths(sr+ movesize, sc,dr,dc);
-            for(String val: vpaths){
-                paths.add("v" + movesize+ val);
-            }
+        for(int movesize = 1; movesize <= dr-sr; movesize++){
+            getMazePaths(sr+ movesize, sc,dr,dc, psf + "v" + movesize);
+            
         }
 
         //for diagonal moves
         for(int movesize = 1; movesize<= dr-sr && movesize <= dc-sc; movesize++){
-            ArrayList<String> dpaths = getMazePaths(sr+movesize, sc+movesize, dr ,dc);
-            for(String val: dpaths){
-                paths.add("d" + movesize + val);
-            }
+            getMazePaths(sr+movesize, sc+movesize, dr ,dc, psf + "d" + movesize);
+            
         }
-
-        return paths;
+      
 
 
         
