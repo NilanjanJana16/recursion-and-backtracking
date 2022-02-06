@@ -30,8 +30,7 @@ public class mazepathjumps {
             
 
         }
-
-       
+      
         
         //for horizontal moves
         for(int movesize = 1; movesize <= dc - sc; movesize++){
